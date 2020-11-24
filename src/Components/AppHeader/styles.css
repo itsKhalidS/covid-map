@@ -1,0 +1,32 @@
+.app-header{
+    background-color: rgb(50, 50, 50);
+    color: white;
+    min-height: 15vh;
+    margin: 0;
+}
+.brand-cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.global-data-cont{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.global-div{
+    margin: 10px;
+}
+.global-cont-p{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.num-cont{
+    /* display: inline-block; */
+    width: 100%;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+}
