@@ -1,5 +1,19 @@
 .app-background{
     min-height: 100vh;
-    background-color: lightcyan;
     padding: 0;
+}
+.app-body-cont{
+    min-height: 85vh;
+    min-width: 100vh;
+    margin: 0;
+}
+.country-cont{
+    box-sizing: border-box;
+    min-height: 100%;
+    border-top: 1px solid rgb(120, 120, 120);
+    background-color: rgb(50, 50, 50);
+    margin:0;
+}
+.map-cont{
+    width: 100%;
 }
