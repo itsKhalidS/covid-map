@@ -2,6 +2,7 @@ import React from "react"
 import "./styles.css"
 import AppHeader from "../AppHeader/index.js"
 import SideBar from "../SideBar/index.js"
+import MapChart from "../MapChart/index.js";
 class Background extends React.Component{
     constructor(props){
         super(props);
@@ -15,7 +16,7 @@ class Background extends React.Component{
     }
     componentDidMount = () => {
         this.fetchData();
-    }    
+    }
     fetchData = () => {
         const url="https://api.covid19api.com/summary"
         this.setState({isLoading:true})
@@ -47,9 +48,8 @@ class Background extends React.Component{
                 loadSuccessful: false
             })
         })
-    }    
-    render = () => {
-        
+    }
+    render = () => {        
         return(            
             <div className="container-fluid app-background">
                 <AppHeader isLoading={this.state.isLoading} loadSuccessful={this.state.loadSuccessful} data={this.state.global}/>
@@ -61,7 +61,7 @@ class Background extends React.Component{
                             currrentCountry={this.state.currrentCountry}
                         />
                     </div>
-                    <div className="col-md-9 map-cont"></div>
+                    <div className="col-md-9 map-cont"><MapChart countries={this.state.countries}/></div>
                 </div>
             </div>
         )
