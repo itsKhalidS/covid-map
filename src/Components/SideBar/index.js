@@ -2,6 +2,7 @@ import React from "react"
 import "./styles.css"
 
 class SideBar extends React.Component{
+
     constructor(props){
         super(props);
         this.state={
@@ -11,6 +12,7 @@ class SideBar extends React.Component{
             currrentCountry: props.currrentCountry
         }
     }
+
     static getDerivedStateFromProps(props,state){
         if(props.isLoading === state.isLoading){
             return null;
@@ -24,28 +26,15 @@ class SideBar extends React.Component{
             }
         }
     }
+
     onCountryChange = (event) => {
-        let countryData={}
-        let L=0,U=this.state.countries.length-1,mid
-            while(L<=U)
-            {
-                mid=Math.floor((L+U)/2)
-                if(event.target.value>this.state.countries[mid].Country){
-                    L=mid+1
-                }
-                else if(event.target.value<this.state.countries[mid].Country){
-                    U=mid-1
-                }
-                else{
-                    countryData=this.state.countries[mid];
-                    break;  
-                }
-            }            
-            this.setState({
-                currrentCountry:countryData
-            })
-            this.props.changeCoordinates(countryData)
-    }    
+        const countryData=this.state.countries.find((s)=>s.Country===event.target.value)
+        this.setState({
+            currrentCountry:countryData
+        })
+        this.props.changeCoordinates(countryData)
+    }
+
     render = () => {
         return(
             <div className="container-fluid sideBar">
@@ -70,13 +59,6 @@ class SideBar extends React.Component{
                         </select>))
                     }
                 </div>
-                <div className="sidebar-div"><p className="sidebar-cont-p"><span>New Confirmed&nbsp;:</span>
-                    {this.state.isLoading ? 
-                        (<span className="sidebar-num-cont"><span className="spinner-border spinner-border-sm text-dark"></span></span>) 
-                        :(this.state.loadSuccessful ? (<span className="sidebar-num-cont">{this.state.currrentCountry.NewConfirmed}</span>)
-                            :(<span className="sidebar-num-cont">Failed to Load</span>))
-                    }</p>
-                </div>
                 <div className="sidebar-div"><p className="sidebar-cont-p"><span>Total Confirmed&nbsp;:</span>
                     {this.state.isLoading ? 
                         (<span className="sidebar-num-cont"><span className="spinner-border spinner-border-sm text-dark"></span></span>) 
@@ -84,10 +66,10 @@ class SideBar extends React.Component{
                             :(<span className="sidebar-num-cont">Failed to Load</span>))
                     }</p>
                 </div>
-                <div className="sidebar-div"><p className="sidebar-cont-p"><span>New Deaths&nbsp;:</span>
+                <div className="sidebar-div"><p className="sidebar-cont-p"><span>New Confirmed&nbsp;:</span>
                     {this.state.isLoading ? 
                         (<span className="sidebar-num-cont"><span className="spinner-border spinner-border-sm text-dark"></span></span>) 
-                        :(this.state.loadSuccessful ? (<span className="sidebar-num-cont">{this.state.currrentCountry.NewDeaths}</span>)
+                        :(this.state.loadSuccessful ? (<span className="sidebar-num-cont">{this.state.currrentCountry.NewConfirmed}</span>)
                             :(<span className="sidebar-num-cont">Failed to Load</span>))
                     }</p>
                 </div>
@@ -98,10 +80,10 @@ class SideBar extends React.Component{
                             :(<span className="sidebar-num-cont">Failed to Load</span>))
                     }</p>
                 </div>
-                <div className="sidebar-div"><p className="sidebar-cont-p"><span>New Recovered&nbsp;:</span>
+                <div className="sidebar-div"><p className="sidebar-cont-p"><span>New Deaths&nbsp;:</span>
                     {this.state.isLoading ? 
                         (<span className="sidebar-num-cont"><span className="spinner-border spinner-border-sm text-dark"></span></span>) 
-                        :(this.state.loadSuccessful ? (<span className="sidebar-num-cont">{this.state.currrentCountry.NewRecovered}</span>)
+                        :(this.state.loadSuccessful ? (<span className="sidebar-num-cont">{this.state.currrentCountry.NewDeaths}</span>)
                             :(<span className="sidebar-num-cont">Failed to Load</span>))
                     }</p>
                 </div>
@@ -109,6 +91,13 @@ class SideBar extends React.Component{
                     {this.state.isLoading ? 
                         (<span className="sidebar-num-cont"><span className="spinner-border spinner-border-sm text-dark"></span></span>) 
                         :(this.state.loadSuccessful ? (<span className="sidebar-num-cont">{this.state.currrentCountry.TotalRecovered}</span>)
+                            :(<span className="sidebar-num-cont">Failed to Load</span>))
+                    }</p>
+                </div>
+                <div className="sidebar-div"><p className="sidebar-cont-p"><span>New Recovered&nbsp;:</span>
+                    {this.state.isLoading ? 
+                        (<span className="sidebar-num-cont"><span className="spinner-border spinner-border-sm text-dark"></span></span>) 
+                        :(this.state.loadSuccessful ? (<span className="sidebar-num-cont">{this.state.currrentCountry.NewRecovered}</span>)
                             :(<span className="sidebar-num-cont">Failed to Load</span>))
                     }</p>
                 </div>

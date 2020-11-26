@@ -3,7 +3,9 @@ import "./styles.css"
 import AppHeader from "../AppHeader/index.js"
 import SideBar from "../SideBar/index.js"
 import MapChart from "../MapChart/index.js";
+
 class Background extends React.Component{
+
     constructor(props){
         super(props);
         this.state={
@@ -16,12 +18,15 @@ class Background extends React.Component{
             countryCode:"",
             latitude:0,
             longitude:0,
-            zoom:1.12
+            zoom:1.12,
+            plotCondition: 0
         }
     }
+
     componentDidMount = () => {
         this.fetchData();
     }
+
     fetchData = () => {
         const url="https://api.covid19api.com/summary"
         this.setState({isLoading:true})
@@ -30,7 +35,7 @@ class Background extends React.Component{
         }).then((response) => {
             return response.json()
         }).then((result) => {
-            this.fetchLatitudeLongitude(result) 
+            this.fetchLatitudeLongitude(result)
         }).catch((error) => {
             alert("Failed to retrieve data from server\nPlease check your Internet connection and try again");
             this.setState({
@@ -39,39 +44,23 @@ class Background extends React.Component{
             })
         })
     }
+    
     fetchLatitudeLongitude = (result) => {
         let countryData={},newCoordinates=[]
         const url_latLon="https://www.trackcorona.live/api/countries"
         fetch(url_latLon,{
             method:"GET"
         }).then((response) => {
-            console.log("fetching done response collected")
             return response.json()
         }).then((res) => {            
             newCoordinates=res.data.map((country) => {
                 return {
-                    CountryCode:country.country_code.toUpperCase(),
+                    CountryCode: country.country_code.toUpperCase(),
                     Latitude: country.latitude,
                     Longitude: country.longitude
                 }
             })
-            console.log(newCoordinates)
-            let L=0,U=result.Countries.length-1,mid
-            while(L<=U)
-            {
-                mid=Math.floor((L+U)/2)
-                if("United States of America">result.Countries[mid].Country){
-                    L=mid+1
-                }
-                else if("United States of America"<result.Countries[mid].Country){
-                    U=mid-1
-                }
-                else{
-                    countryData=result.Countries[mid];
-                    console.log(countryData);
-                    break;  
-                }
-            }
+            countryData=result.Countries.find((s)=>s.Country==="United States of America")
             this.setState({
                 isLoading:false,
                 loadSuccessful: true,
@@ -88,30 +77,51 @@ class Background extends React.Component{
                 loadSuccessful: false
             })
         })
-    }    
+    }
+
     changeCoordinates= (c) => { 
         const d=this.state.coordinates.find((s) => s.CountryCode===c.CountryCode)
         console.log("changeCoordinatesCalled",c,d)
         if(d){
             this.setState({
-                countryCode:d.CountryCode,
+                countryCode: d.CountryCode,
                 latitude: d.Latitude,
                 longitude: d.Longitude,
                 zoom:3
             })
         }else{
             this.setState({
-                countryCode:"",
+                countryCode: "",
                 latitude: 0,
                 longitude: 0,
-                zoom:1.12
+                zoom: 1.12
             })
         }
     }
+
+    plotByDeathCases = (e) => {
+        if(this.state.plotCondition !== 1){
+            this.setState({
+                plotCondition: 1
+            })
+        }
+    }
+    plotByConfirmedCases = (e) => {
+        if(this.state.plotCondition !== 0){
+            this.setState({
+                plotCondition: 0
+            })
+        }
+    }
+
     render = () => {        
         return(            
             <div className="container-fluid app-background">
-                <AppHeader isLoading={this.state.isLoading} loadSuccessful={this.state.loadSuccessful} data={this.state.global}/>
+                <AppHeader 
+                    isLoading={this.state.isLoading} 
+                    loadSuccessful={this.state.loadSuccessful} 
+                    data={this.state.global}
+                />
                 <div className="row app-body-cont">
                     <div className="col-md-3 country-cont">
                         <SideBar isLoading={this.state.isLoading} 
@@ -126,6 +136,9 @@ class Background extends React.Component{
                                                         latitude={this.state.latitude}
                                                         longitude={this.state.longitude}
                                                         zoom={this.state.zoom}
+                                                        plotByConfirmedCases={this.plotByConfirmedCases}
+                                                        plotByDeathCases={this.plotByDeathCases}
+                                                        plotCondition={this.state.plotCondition}
                                                         />
                     </div>
                 </div>

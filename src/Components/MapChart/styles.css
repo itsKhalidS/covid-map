@@ -1,0 +1,23 @@
+.map-container{
+    position: relative;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+.button-container{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.button{
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 0;
+    color: black;
+    border: 1px solid rgb(50, 50, 50)
+}
+.button-active{
+    background-color: rgb(50, 50, 50);
+    color: white;
+}
