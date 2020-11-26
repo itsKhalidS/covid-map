@@ -20,15 +20,16 @@ import {
     return (
         <div>
           <ComposableMap width={1050}>
-            <ZoomableGroup zoom={1.12}>
+            <ZoomableGroup center={[props.longitude,props.latitude]} zoom={props.zoom}>
             <Sphere stroke="#D2D3D4" strokeWidth={0.5}/>
             <Graticule stroke="#D2D3D4" strokeWidth={0.5} />
               <Geographies geography={geoUrl}>
                 {({ geographies }) =>
                   geographies.map(geo => {
                     const d = props.countries.find((s) => s.CountryCode === geo.properties.ISO_A2);
+                    const c = geo.properties.ISO_A2 === props.countryCode
                     return(
-                        <Geography key={geo.rsmKey} geography={geo} stroke="#000000" strokeWidth={0.1} 
+                        <Geography key={geo.rsmKey} geography={geo} stroke="#000000" strokeWidth={c ? 1.25 : 0.1 } 
                         fill={d?colorScale(d.TotalConfirmed):"#FFFFFF"}/>
                     )
                   })

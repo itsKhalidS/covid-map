@@ -3,7 +3,7 @@ import "./styles.css"
 
 class SideBar extends React.Component{
     constructor(props){
-        super(props)
+        super(props);
         this.state={
             isLoading: props.isLoading,
             loadSuccessful: props.loadSuccessful,
@@ -25,18 +25,26 @@ class SideBar extends React.Component{
         }
     }
     onCountryChange = (event) => {
-        let countryData={},i
-            for(i=0;i<this.state.countries.length;i++)
+        let countryData={}
+        let L=0,U=this.state.countries.length-1,mid
+            while(L<=U)
             {
-                if(this.state.countries[i].Country===event.target.value)
-                {
-                    countryData=this.state.countries[i];
-                    break;
+                mid=Math.floor((L+U)/2)
+                if(event.target.value>this.state.countries[mid].Country){
+                    L=mid+1
                 }
-            }
+                else if(event.target.value<this.state.countries[mid].Country){
+                    U=mid-1
+                }
+                else{
+                    countryData=this.state.countries[mid];
+                    break;  
+                }
+            }            
             this.setState({
                 currrentCountry:countryData
             })
+            this.props.changeCoordinates(countryData)
     }    
     render = () => {
         return(
