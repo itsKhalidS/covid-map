@@ -22,15 +22,13 @@ import "./styles.css"
     .domain([0, 55000])
     .range(["#FFE1C3", "#CE0A05"]);
 
-    const totalCasesPerMillion = (totalCases,population,code) => {
+    const totalCasesPerMillion = (totalCases,population) => {
       const result=totalCases*1000000/population
-      console.log(code," total cases per million ---->",result)
       return(confirmedPMScale(result))
     }
 
-    const totalDeathsPerMillion = (totalDeaths,population,c) => {
+    const totalDeathsPerMillion = (totalDeaths,population) => {
       const r=totalDeaths*1000000/population
-      console.log(c,"total DEATHS per million---->",r)
       return(deathPMScale(r))
     }
 
@@ -48,6 +46,18 @@ import "./styles.css"
                 Total Deaths (per million)
             </button>
           </div>
+
+          <div className="color-palette-container">
+          <div className="case-indicator">
+              <span>Low</span>
+              <span>High</span>
+            </div>
+            <div className="color-palette">
+              <span className="span-1"></span><span className="span-2"></span><span className="span-3"></span>
+              <span className="span-4"></span><span className="span-5"></span><span className="span-6"></span>
+            </div>            
+          </div>
+
           <ComposableMap width={1050}>
             <ZoomableGroup center={[props.longitude,props.latitude]} zoom={props.zoom}>
             <Sphere stroke="#E4E5E6" strokeWidth={0.5}/>
@@ -60,8 +70,8 @@ import "./styles.css"
                     return(
                         <Geography key={geo.rsmKey} geography={geo} stroke="#000000" strokeWidth={c ? 1.25 : 0.1 } 
                         fill={d?(
-                            (props.plotCondition)?(totalDeathsPerMillion(d.TotalDeaths,geo.properties.POP_EST,geo.properties.ISO_A2))
-                            :(totalCasesPerMillion(d.TotalConfirmed,geo.properties.POP_EST,geo.properties.ISO_A2)))
+                            (props.plotCondition)?(totalDeathsPerMillion(d.TotalDeaths,geo.properties.POP_EST))
+                            :(totalCasesPerMillion(d.TotalConfirmed,geo.properties.POP_EST)))
                           :"#FFFFFF"}/>
                     )
                   })
@@ -69,9 +79,13 @@ import "./styles.css"
               </Geographies>
             </ZoomableGroup>
           </ComposableMap>
+          
+          <p className="self">
+            Developed by <a  className="linkedin" href="https://www.linkedin.com/in/md-khalid-shahzad-7b63611b1" target="_blank" rel="noreferrer">
+              Md Khalid Shahzad</a>
+          </p>
         </div>
       );
-
   }
 
   export default MapChart;

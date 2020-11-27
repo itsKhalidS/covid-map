@@ -1,7 +1,7 @@
 import React from "react"
 import "./styles.css"
 
-const AppHeader = (props) => {    
+const AppHeader = (props) => {
     return(
         <div className="container-fluid row app-header">
             <div className="col-md-3 brand-cont "><h2>Covid-19 Tracker</h2></div>

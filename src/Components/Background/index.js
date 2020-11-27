@@ -81,7 +81,6 @@ class Background extends React.Component{
 
     changeCoordinates= (c) => { 
         const d=this.state.coordinates.find((s) => s.CountryCode===c.CountryCode)
-        console.log("changeCoordinatesCalled",c,d)
         if(d){
             this.setState({
                 countryCode: d.CountryCode,
