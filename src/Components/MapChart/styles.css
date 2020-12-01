@@ -1,104 +1,104 @@
-.map-container{
-    position: relative;
-    right: 0;
-    top: 0;
-    left: 0;
-    bottom: 0;
+.map-container {
+	position: relative;
+	right: 0;
+	top: 0;
+	left: 0;
+	bottom: 0;
 }
-.button-container{
-    position: absolute;
-    top: 0;
-    right: 0;
+.button-container {
+	position: absolute;
+	top: 0;
+	right: 0;
 }
-.button{
-    font-size: 12px;
-    font-weight: 500;
-    border-radius: 0;
-    color: black;
-    border: 1px solid rgb(50, 50, 50)
+.button {
+	font-size: 12px;
+	font-weight: 500;
+	border-radius: 0;
+	color: black;
+	border: 1px solid rgb(50, 50, 50);
 }
-.button-active{
-    background-color: rgb(50, 50, 50);
-    color: white;
+.button-active {
+	background-color: rgb(50, 50, 50);
+	color: white;
 }
-.color-palette-container{
-    position: absolute;
-    top: 5;
-    right: 5;
-    width:200px;
-    height: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: white;
+.color-palette-container {
+	position: absolute;
+	top: 5;
+	right: 5;
+	width: 200px;
+	height: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: white;
 }
-.color-palette{
-    width: 100%;
+.color-palette {
+	width: 100%;
 }
-.span-1{
-    display: inline-block;
-    height: 7px;
-    width:17%;
-    background-color: #FFE1C3;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
+.span-1 {
+	display: inline-block;
+	height: 7px;
+	width: 17%;
+	background-color: #ffe1c3;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	border-left: 1px solid black;
 }
-.span-2{
-    display: inline-block;
-    height: 7px;
-    width:16%;
-    background-color: #F5B69D ;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+.span-2 {
+	display: inline-block;
+	height: 7px;
+	width: 16%;
+	background-color: #f5b69d;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 }
-.span-3{
-    display: inline-block;
-    height: 7px;
-    width:16%;
-    background-color: #EB8B77 ;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+.span-3 {
+	display: inline-block;
+	height: 7px;
+	width: 16%;
+	background-color: #eb8b77;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 }
-.span-4{
-    display: inline-block;
-    height: 7px;
-    width:17%;
-    background-color: #E26051;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+.span-4 {
+	display: inline-block;
+	height: 7px;
+	width: 17%;
+	background-color: #e26051;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 }
-.span-5{
-    display: inline-block;
-    height: 7px;
-    width:16%;
-    background-color: #D8352B;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+.span-5 {
+	display: inline-block;
+	height: 7px;
+	width: 16%;
+	background-color: #d8352b;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 }
-.span-6{
-    display: inline-block;
-    height: 7px;
-    width:17%;
-    background-color: #CE0A05;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    border-right: 1px solid black;
+.span-6 {
+	display: inline-block;
+	height: 7px;
+	width: 17%;
+	background-color: #ce0a05;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
 }
-.case-indicator{
-    font-size: 12px;
-    font-weight: 600;
-    display: flex;
-    justify-content: space-between;
+.case-indicator {
+	font-size: 12px;
+	font-weight: 600;
+	display: flex;
+	justify-content: space-between;
 }
-.self{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    font-size: 0.75em;
-    font-weight: 500;
-    background-color: white;
+.self {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	font-size: 0.8rem;
+	font-weight: 500;
+	background-color: white;
 }
-.linkedin:hover{
-    text-decoration: underline;
+.linkedin:hover {
+	text-decoration: underline;
 }

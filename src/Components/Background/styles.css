@@ -1,19 +1,50 @@
-.app-background{
-    min-height: 100vh;
-    padding: 0;
+.app-background {
+	min-height: 100vh;
+	padding: 0;
 }
-.app-body-cont{
-    min-height: 85vh;
-    min-width: 100vh;
-    margin: 0;
+.app-body-cont {
+	min-height: 85vh;
+	min-width: 100vh;
+	margin: 0;
 }
-.country-cont{
-    box-sizing: border-box;
-    min-height: 100%;
-    border-top: 1px solid rgb(120, 120, 120);
-    background-color: rgb(50, 50, 50);
-    margin:0;
+.country-cont {
+	box-sizing: border-box;
+	min-height: 100%;
+	border-top: 1px solid rgb(120, 120, 120);
+	background-color: rgb(50, 50, 50);
+	margin: 0;
+	padding-top: 25px;
+	position: relative;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
 }
-.map-cont{
-    width: 100%;
+.button-cont {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 25px;
+}
+.butn {
+	width: 50%;
+	height: 100%;
+	font-size: 0.65rem;
+	background-color: rgb(50, 50, 50);
+	color: white;
+	font-weight: 500;
+	border: 1px solid rgb(120, 120, 120);
+}
+.butn-active {
+	text-decoration: underline;
+	font-size: 0.85rem;
+	background-color: white;
+	color: black;
+}
+.hide {
+	display: none;
+}
+.map-cont {
+	width: 100%;
 }

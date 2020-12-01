@@ -1,7 +1,8 @@
 import React from "react"
 import "./styles.css"
 import AppHeader from "../AppHeader/index.js"
-import SideBar from "../SideBar/index.js"
+import SideBarOverall from "../SideBar/SideBarOverall.js"
+import SideBarMonth from "../SideBar/SideBarMonth.js"
 import MapChart from "../MapChart/index.js"
 
 class Background extends React.Component {
@@ -12,20 +13,28 @@ class Background extends React.Component {
 			loadSuccessful: false,
 			global: {},
 			countries: [],
-			currrentCountry: {},
+			currentCountry: {},
 			coordinates: [],
 			countryCode: "",
 			latitude: 0,
 			longitude: 0,
 			zoom: 1.12,
 			plotCondition: 0,
+			SideBarOverall: true,
+			startDate: "2020-01-22",
+			endDate: "2020-02-22",
+			isComponentLoading: false,
+			componentLoadSuccessful: false,
+			data: {
+				confirmed: 0,
+				recovered: 0,
+				dead: 0,
+			},
 		}
 	}
-
 	componentDidMount = () => {
 		this.fetchData()
 	}
-
 	fetchData = () => {
 		const url = "https://api.covid19api.com/summary"
 		this.setState({ isLoading: true })
@@ -48,7 +57,6 @@ class Background extends React.Component {
 				})
 			})
 	}
-
 	fetchLatitudeLongitude = (result) => {
 		let countryData = {},
 			newCoordinates = []
@@ -75,7 +83,7 @@ class Background extends React.Component {
 					loadSuccessful: true,
 					global: result.Global,
 					countries: result.Countries,
-					currrentCountry: countryData,
+					currentCountry: countryData,
 					coordinates: newCoordinates,
 				})
 			})
@@ -89,10 +97,30 @@ class Background extends React.Component {
 				})
 			})
 	}
-
-	changeCoordinates = (c) => {
+	changeToOverallSidebar = () => {
+		if (this.state.SideBarOverall !== true) {
+			this.setState({
+				SideBarOverall: true,
+			})
+		}
+	}
+	changeToMonthlySidebar = () => {
+		if (this.state.SideBarOverall !== false) {
+			this.setState({
+				SideBarOverall: false,
+			})
+			this.dateValidation()
+		}
+	}
+	onCountryChange = (event) => {
+		const countryData = this.state.countries.find(
+			(s) => s.Country === event.target.value
+		)
+		this.setState({
+			currentCountry: countryData,
+		})
 		const d = this.state.coordinates.find(
-			(s) => s.CountryCode === c.CountryCode
+			(s) => s.CountryCode === countryData.CountryCode
 		)
 		if (d) {
 			this.setState({
@@ -110,22 +138,118 @@ class Background extends React.Component {
 			})
 		}
 	}
-
-	plotByDeathCases = (e) => {
+	onStartDateChange = (event) => {
+		this.setState({
+			startDate: event.target.value,
+		})
+	}
+	onEndDateChange = (event) => {
+		this.setState({
+			endDate: event.target.value,
+		})
+	}
+	dateValidation = () => {
+		let raiseAlert = false
+		const startYear = parseInt(this.state.startDate.substr(0, 4))
+		const startMonth = parseInt(
+			this.state.startDate.substr(this.state.startDate.indexOf("-") + 1, 2)
+		)
+		const startDay = parseInt(
+			this.state.startDate.substr(this.state.startDate.lastIndexOf("-") + 1, 2)
+		)
+		const endYear = parseInt(this.state.endDate.substr(0, 4))
+		const endMonth = parseInt(
+			this.state.endDate.substr(this.state.endDate.indexOf("-") + 1, 2)
+		)
+		const endDay = parseInt(
+			this.state.endDate.substr(this.state.endDate.lastIndexOf("-") + 1, 2)
+		)
+		if (startYear > endYear) {
+			raiseAlert = true
+		} else if (startYear === endYear) {
+			if (startMonth > endMonth) {
+				raiseAlert = true
+			} else if (startMonth === endMonth) {
+				if (startDay >= endDay) {
+					raiseAlert = true
+				}
+			} else {
+				raiseAlert = false
+			}
+		} else {
+			raiseAlert = false
+		}
+		if (raiseAlert) {
+			alert("Start Day should be at least one day less than End Day")
+			return
+		}
+		this.fetchRangeData()
+	}
+	fetchRangeData = () => {
+		const url = `https://api.covid19api.com/country/${this.state.currentCountry.Slug}?from=${this.state.startDate}T00:00:00Z&to=${this.state.endDate}T00:00:00Z`
+		this.setState({ isComponentLoading: true })
+		fetch(url, {
+			method: "GET",
+		})
+			.then((response) => {
+				return response.json()
+			})
+			.then((result) => {
+				let i,
+					stConfirmed = 0,
+					stRecovered = 0,
+					stDeaths = 0,
+					endConfirmed = 0,
+					endRecovered = 0,
+					endDeaths = 0,
+					firstDate = result[0].Date,
+					lastDate = result[result.length - 1].Date
+				for (i = 0; i < result.length; i++) {
+					if (result[i].Date === firstDate) {
+						stConfirmed = stConfirmed + result[i].Confirmed
+						stRecovered = stRecovered + result[i].Recovered
+						stDeaths = stDeaths + result[i].Deaths
+					}
+					if (result[i].Date === lastDate) {
+						endConfirmed = endConfirmed + result[i].Confirmed
+						endRecovered = endRecovered + result[i].Recovered
+						endDeaths = endDeaths + result[i].Deaths
+					}
+				}
+				this.setState({
+					isComponentLoading: false,
+					componentLoadSuccessful: true,
+					data: {
+						confirmed: endConfirmed - stConfirmed,
+						recovered: endRecovered - stRecovered,
+						dead: endDeaths - stDeaths,
+					},
+				})
+			})
+			.catch((error) => {
+				alert(
+					"Failed to retrieve data from server\nPlease check your Internet connection and try again"
+				)
+				this.setState({
+					isComponentLoading: false,
+					componentLoadSuccessful: false,
+				})
+			})
+	}
+	plotByDeathCases = () => {
 		if (this.state.plotCondition !== 1) {
 			this.setState({
 				plotCondition: 1,
 			})
 		}
 	}
-	plotByConfirmedCases = (e) => {
+	plotByConfirmedCases = () => {
 		if (this.state.plotCondition !== 0) {
 			this.setState({
 				plotCondition: 0,
 			})
 		}
 	}
-
 	render = () => {
 		return (
 			<div className="container-fluid app-background">
@@ -136,13 +260,61 @@ class Background extends React.Component {
 				/>
 				<div className="row app-body-cont">
 					<div className="col-md-3 country-cont">
-						<SideBar
-							isLoading={this.state.isLoading}
-							loadSuccessful={this.state.loadSuccessful}
-							countries={this.state.countries}
-							currrentCountry={this.state.currrentCountry}
-							changeCoordinates={this.changeCoordinates}
-						/>
+						<div className="button-cont">
+							<button
+								className={
+									this.state.isLoading || this.state.loadSuccessful === false
+										? "hide"
+										: this.state.SideBarOverall
+										? "butn butn-active"
+										: "butn"
+								}
+								onClick={this.changeToOverallSidebar}
+								disabled={
+									this.state.isLoading || this.state.loadSuccessful === false
+								}
+							>
+								Summarized Data
+							</button>
+							<button
+								className={
+									this.state.isLoading || this.state.loadSuccessful === false
+										? "hide"
+										: this.state.SideBarOverall
+										? "butn"
+										: "butn butn-active"
+								}
+								onClick={this.changeToMonthlySidebar}
+								disabled={
+									this.state.isLoading || this.state.loadSuccessful === false
+								}
+							>
+								Data in an Interval
+							</button>
+						</div>
+						{this.state.SideBarOverall ? (
+							<SideBarOverall
+								isLoading={this.state.isLoading}
+								loadSuccessful={this.state.loadSuccessful}
+								countries={this.state.countries}
+								currentCountry={this.state.currentCountry}
+								onCountryChange={this.onCountryChange}
+							/>
+						) : (
+							<SideBarMonth
+								countries={this.state.countries}
+								currentCountry={this.state.currentCountry}
+								startDate={this.state.startDate}
+								endDate={this.state.endDate}
+								isComponentLoading={this.state.isComponentLoading}
+								componentLoadSuccessful={this.state.componentLoadSuccessful}
+								data={this.state.data}
+								onCountryChange={this.onCountryChange}
+								onStartDateChange={this.onStartDateChange}
+								onEndDateChange={this.onEndDateChange}
+								dateValidation={this.dateValidation}
+							/>
+						)}
 					</div>
 					<div className="col-md-9 map-cont">
 						<MapChart

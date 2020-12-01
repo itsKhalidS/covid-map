@@ -1,35 +1,45 @@
-.sideBar{
-    color: white;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+.sideBar {
+	color: white;
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
 }
-.sidebar-div{
-    width: 80%;
-    margin: 10px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.sidebar-div {
+	width: 80%;
+	margin: 10px 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
-.country-dropdown{
-    width:100%;
-    font-weight: 600;
+.country-dropdown {
+	width: 100%;
+	font-weight: 600;
 }
-.sidebar-cont-p{
-    width: 100%;
-    margin: 0;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.sidebar-input {
+	width: 70%;
 }
-.sidebar-num-cont{
-    width: 70%;
-    font-weight: bold;
-    background-color: white;
-    color: black;
-    border-radius: 2px;
+.sidebar-button {
+	width: 40%;
+	font-weight: bold;
+	border-radius: 3px;
+	border: 1px solid black;
+	color: maroon;
+}
+.sidebar-cont-p {
+	width: 100%;
+	margin: 0;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.sidebar-num-cont {
+	width: 70%;
+	font-weight: bold;
+	background-color: white;
+	color: black;
+	border-radius: 2px;
 }
