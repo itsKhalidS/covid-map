@@ -1,0 +1,33 @@
+.my-navbar {
+	min-height: 8vh;
+	min-width: 100vh;
+	background-color: rgb(50, 50, 50);
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px 28px 5px 15px;
+}
+.app-brand {
+	font-size: 1.75rem;
+	font-weight: 600;
+}
+.app-logo {
+	height: 35px;
+	font-size: 0.75rem;
+	padding-right: 10px;
+}
+.auth-btn {
+	height: 100%;
+	background-color: inherit;
+	color: white;
+	border: none;
+}
+.auth-btn:hover {
+	color: rgb(200, 200, 200);
+	text-decoration: none;
+	font-size: 1.03rem;
+}
+.hidden {
+	visibility: hidden;
+}

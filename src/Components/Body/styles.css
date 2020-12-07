@@ -1,9 +1,9 @@
 .app-background {
-	min-height: 100vh;
+	min-height: 92vh;
 	padding: 0;
 }
 .app-body-cont {
-	min-height: 85vh;
+	min-height: 78vh;
 	min-width: 100vh;
 	margin: 0;
 }
@@ -14,6 +14,7 @@
 	background-color: rgb(50, 50, 50);
 	margin: 0;
 	padding-top: 25px;
+	padding-bottom: 20px;
 	position: relative;
 	top: 0;
 	right: 0;

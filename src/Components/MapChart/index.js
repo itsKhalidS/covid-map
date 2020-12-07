@@ -64,7 +64,7 @@ const MapChart = (props) => {
 				</div>
 			</div>
 
-			<ComposableMap width={1050}>
+			<ComposableMap width={1145}>
 				<ZoomableGroup
 					center={[props.longitude, props.latitude]}
 					zoom={props.zoom}
@@ -106,7 +106,7 @@ const MapChart = (props) => {
 			</ComposableMap>
 
 			<p className="self">
-				Developed by{" "}
+				Designed and built by{" "}
 				<a
 					className="linkedin"
 					href="https://www.linkedin.com/in/md-khalid-shahzad-7b63611b1"

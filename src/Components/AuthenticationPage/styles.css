@@ -1,0 +1,110 @@
+.nav {
+	min-height: 8vh;
+	min-width: 100vh;
+	background-color: rgb(50, 50, 50);
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px 28px 5px 15px;
+}
+.app-name {
+	font-size: 1.75rem;
+	font-weight: 600;
+}
+.app-img {
+	height: 35px;
+	font-size: 0.75rem;
+	padding-right: 10px;
+}
+.home-btn {
+	height: 100%;
+	background-color: inherit;
+	color: white;
+	border: none;
+}
+.home-btn:hover {
+	color: rgb(200, 200, 200);
+	font-size: 1.03rem;
+	text-decoration: none;
+}
+.page-body {
+	min-height: 92vh;
+	min-width: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.form-container {
+	width: 70vh;
+	height: 53vh;
+	background-color: rgb(50, 50, 50);
+	color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 5px 15px 5px;
+}
+.input-div {
+	width: 90%;
+	height: 10%;
+	display: flex;
+	justify-content: space-between;
+	margin: 10px;
+}
+.input-field {
+	width: 65%;
+	border-radius: 3px;
+}
+.page-btn {
+	width: 50%;
+	height: max-content;
+	background-color: rgb(200, 200, 200);
+	color: black;
+	font-weight: 600;
+}
+.form-changer {
+	width: 90%;
+	text-align: end;
+}
+.form-change-btn {
+	background-color: rgb(200, 200, 200);
+	color: black;
+	font-weight: 500;
+	border: 1px solid black;
+}
+.message {
+	padding-left: 20px;
+	padding-right: 10px;
+	color: tomato;
+	font-size: 0.8rem;
+	text-align: center;
+}
+.hide {
+	display: none;
+}
+.reset-page-btn-cont {
+	width: 90%;
+	height: 10%;
+	margin: 10px;
+}
+.reset-page-taker {
+	background-color: inherit;
+	border: none;
+	color: inherit;
+	width: 30%;
+	height: max-content;
+}
+.page-btn:hover,
+.form-change-btn:hover,
+.reset-page-taker:hover {
+	text-decoration: underline;
+	font-size: 1.03rem;
+}
+.disabled-btn {
+	background-color: rgb(100, 100, 100);
+}
+.disabled-reset-page-taker {
+	color: gray;
+}

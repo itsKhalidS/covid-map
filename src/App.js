@@ -1,8 +1,8 @@
 import React from "react"
 import Background from "./Components/Background/index.js"
-import './App.css';
+import "./App.css"
 
 function App() {
-  return <Background />
+	return <Background />
 }
-export default App;
+export default App
