@@ -41,8 +41,12 @@ class AuthenticationPage extends React.Component {
 					case "auth/wrong-password":
 						msg = "Incorrect Password"
 						break
+					case "auth/user-disabled":
+					case "auth/user-not-found":
+						msg = "User Not Found"
+						break
 					default:
-						msg = "User not found"
+						msg = "An Unexpected Error occurred during Login"
 						break
 				}
 				this.setState({
@@ -78,7 +82,7 @@ class AuthenticationPage extends React.Component {
 								"The Password which you have entered is too weak. Passwods should have at least 6 characters and may also contain numbers and symbols"
 							break
 						default:
-							msg = "There was an error during Signing Up"
+							msg = "An Unexpected Error occcurred during Signing Up"
 							break
 					}
 					this.setState({
@@ -109,11 +113,23 @@ class AuthenticationPage extends React.Component {
 					message: "A password reset link has been sent to your email",
 				})
 			})
-			.catch(() => {
+			.catch((error) => {
+				let msg = ""
+				switch (error.code) {
+					case "auth/invalid-email":
+						msg = "Invalid Email Address"
+						break
+					case "auth/user-not-found":
+						msg = "User not found"
+						break
+					default:
+						msg = "An Unexpected Error occcurred"
+						break
+				}
 				this.setState({
 					isLoading: false,
 					email: "",
-					message: "Invalid Email Address / User not found",
+					message: msg,
 				})
 			})
 	}

@@ -1,0 +1,80 @@
+.watch-list {
+	margin: 5px 0;
+	min-height: 14vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.card-cont {
+	min-height: 9vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.country-drop-cont {
+	min-height: 9vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.db-add-btn-cont {
+	display: flex;
+	justify-content: space-between;
+}
+.db-add-btn {
+	width: 48%;
+	border-radius: 5px;
+	color: rgb(200, 200, 200);
+	color: rgb(50, 50, 50);
+	font-weight: 500;
+}
+.watch-list-card {
+	min-height: 100%;
+	width: 30%;
+	border-radius: 10px;
+	border: 3px solid white;
+	background-color: rgb(200, 200, 200);
+	color: rgb(50, 50, 50);
+	font-size: 0.8rem;
+	font-weight: 700;
+	margin: 1px 5px;
+	padding: 0;
+	text-align: center;
+	position: relative;
+}
+.watch-list-card:hover {
+	font-size: 0.9rem;
+}
+.danger {
+	font-size: 0.85rem;
+	color: maroon;
+}
+.disable-button {
+	background-color: rgb(170, 170, 170);
+}
+.disable-button:hover {
+	font-size: 0.8rem;
+}
+.c-blue {
+	font-weight: 700;
+	color: royalblue;
+}
+.delete-btn {
+	height: 20px;
+	width: 20px;
+	font-size: 0.6rem;
+	font-weight: 800;
+	margin: 0;
+	padding: 0;
+	background-color: indianred;
+	color: black;
+	position: absolute;
+	top: 2px;
+	right: 2px;
+}
+.delete-btn:hover {
+	border: 1px solid white;
+}

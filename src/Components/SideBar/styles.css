@@ -1,6 +1,8 @@
 .sideBar {
+	min-height: 80%;
+	border-bottom: 2px solid grey;
 	color: white;
-	min-height: 100%;
+	padding: 10px 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -8,7 +10,7 @@
 }
 .sidebar-div {
 	width: 80%;
-	margin: 10px 0;
+	margin: 2px 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

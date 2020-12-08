@@ -14,12 +14,16 @@
 	background-color: rgb(50, 50, 50);
 	margin: 0;
 	padding-top: 25px;
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 	position: relative;
 	top: 0;
 	right: 0;
 	left: 0;
 	bottom: 0;
+}
+.watchlist-container {
+	min-height: 20%;
+	color: white;
 }
 .button-cont {
 	position: absolute;

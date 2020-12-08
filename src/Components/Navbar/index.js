@@ -22,6 +22,28 @@ class Navbar extends React.Component {
 	signUserOut = () => {
 		fire.auth().signOut()
 	}
+	deleteUser = () => {
+		if (
+			window.confirm(
+				"Deleting your account will delete all your data including your Watch List"
+			)
+		) {
+			const uid = this.state.user.uid
+			let user = fire.auth().currentUser
+			user
+				.delete()
+				.then(() => {
+					const dbRef = fire.database().ref(uid)
+					dbRef.remove()
+					alert("Your Account has been permanantly deleted")
+				})
+				.catch(() => {
+					alert(
+						"There was an error while deleting your account\nTry re-logging in to complete request"
+					)
+				})
+		}
+	}
 	render = () => {
 		return (
 			<div className="my-navbar">
@@ -46,6 +68,9 @@ class Navbar extends React.Component {
 						</button>
 					) : (
 						<div>
+							<span className="welcome-cont">
+								Hi, {this.state.user.email.slice(0, 7) + ".."}
+							</span>
 							<button
 								className={
 									this.state.isLoading ? "hidden auth-btn" : "auth-btn"
@@ -54,6 +79,17 @@ class Navbar extends React.Component {
 								disabled={this.state.isLoading}
 							>
 								Sign Out
+							</button>
+							<button
+								className={
+									this.state.isLoading
+										? "hidden auth-btn delete-user"
+										: "auth-btn delete-user"
+								}
+								onClick={this.deleteUser}
+								disabled={this.state.isLoading}
+							>
+								Delete Account
 							</button>
 						</div>
 					)}

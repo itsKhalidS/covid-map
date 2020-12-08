@@ -24,6 +24,7 @@ class Background extends React.Component {
 					isLoading: false,
 					user: user,
 				})
+				console.log(user)
 			} else {
 				this.setState({
 					isLoading: false,
@@ -49,7 +50,7 @@ class Background extends React.Component {
 							user={this.state.user}
 							changeLoginStatus={this.changeLoginStatus}
 						/>
-						<Body />
+						<Body changeLoginStatus={this.changeLoginStatus} />
 					</>
 				)}
 			</div>

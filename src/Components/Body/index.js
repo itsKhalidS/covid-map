@@ -3,6 +3,7 @@ import AppHeader from "../AppHeader/index.js"
 import SideBarOverall from "../SideBar/SideBarOverall.js"
 import SideBarMonth from "../SideBar/SideBarMonth.js"
 import MapChart from "../MapChart/index.js"
+import WatchList from "../WatchList/index.js"
 import "./styles.css"
 
 class Body extends React.Component {
@@ -315,6 +316,16 @@ class Body extends React.Component {
 								dateValidation={this.dateValidation}
 							/>
 						)}
+						<div className="watchlist-container">
+							<WatchList
+								isLoading={this.state.isLoading}
+								loadSuccessful={this.state.loadSuccessful}
+								countries={this.state.countries}
+								currentCountry={this.state.currentCountry}
+								changeLoginStatus={this.props.changeLoginStatus}
+								onCountryChange={this.onCountryChange}
+							/>
+						</div>
 					</div>
 					<div className="col-lg-9 map-cont">
 						<MapChart

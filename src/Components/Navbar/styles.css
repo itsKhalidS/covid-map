@@ -22,6 +22,7 @@
 	background-color: inherit;
 	color: white;
 	border: none;
+	margin: 0 8px;
 }
 .auth-btn:hover {
 	color: rgb(200, 200, 200);
@@ -30,4 +31,15 @@
 }
 .hidden {
 	visibility: hidden;
+}
+.delete-user {
+	color: indianred;
+}
+.delete-user:hover {
+	color: tomato;
+}
+.welcome-cont {
+	color: darkgrey;
+	font-size: 1.1rem;
+	margin: 0 8px;
 }
