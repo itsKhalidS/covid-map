@@ -7,6 +7,7 @@ import WatchList from "../WatchList/index.js"
 import "./styles.css"
 
 class Body extends React.Component {
+	_isMounted = false
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -34,7 +35,11 @@ class Body extends React.Component {
 		}
 	}
 	componentDidMount = () => {
+		this._isMounted = true
 		this.fetchData()
+	}
+	componentWillUnmount = () => {
+		this._isMounted = false
 	}
 	fetchData = () => {
 		const url = "https://api.covid19api.com/summary"
@@ -52,10 +57,12 @@ class Body extends React.Component {
 				alert(
 					"Failed to retrieve data from server\nPlease check your Internet connection and try again"
 				)
-				this.setState({
-					isLoading: false,
-					loadSuccessful: false,
-				})
+				if (this._isMounted) {
+					this.setState({
+						isLoading: false,
+						loadSuccessful: false,
+					})
+				}
 			})
 	}
 	fetchLatitudeLongitude = (result) => {
@@ -79,23 +86,27 @@ class Body extends React.Component {
 				countryData = result.Countries.find(
 					(s) => s.Country === "United States of America"
 				)
-				this.setState({
-					isLoading: false,
-					loadSuccessful: true,
-					global: result.Global,
-					countries: result.Countries,
-					currentCountry: countryData,
-					coordinates: newCoordinates,
-				})
+				if (this._isMounted) {
+					this.setState({
+						isLoading: false,
+						loadSuccessful: true,
+						global: result.Global,
+						countries: result.Countries,
+						currentCountry: countryData,
+						coordinates: newCoordinates,
+					})
+				}
 			})
 			.catch((error) => {
 				alert(
 					"Failed to retrieve data from server\nPlease check your Internet connection and try again"
 				)
-				this.setState({
-					isLoading: false,
-					loadSuccessful: false,
-				})
+				if (this._isMounted) {
+					this.setState({
+						isLoading: false,
+						loadSuccessful: false,
+					})
+				}
 			})
 	}
 	changeToOverallSidebar = () => {
@@ -217,24 +228,28 @@ class Body extends React.Component {
 						endDeaths = endDeaths + result[i].Deaths
 					}
 				}
-				this.setState({
-					isComponentLoading: false,
-					componentLoadSuccessful: true,
-					data: {
-						confirmed: endConfirmed - stConfirmed,
-						recovered: endRecovered - stRecovered,
-						dead: endDeaths - stDeaths,
-					},
-				})
+				if (this._isMounted) {
+					this.setState({
+						isComponentLoading: false,
+						componentLoadSuccessful: true,
+						data: {
+							confirmed: endConfirmed - stConfirmed,
+							recovered: endRecovered - stRecovered,
+							dead: endDeaths - stDeaths,
+						},
+					})
+				}
 			})
 			.catch((error) => {
 				alert(
 					"Failed to retrieve data from server\nPlease check your Internet connection and try again"
 				)
-				this.setState({
-					isComponentLoading: false,
-					componentLoadSuccessful: false,
-				})
+				if (this._isMounted) {
+					this.setState({
+						isComponentLoading: false,
+						componentLoadSuccessful: false,
+					})
+				}
 			})
 	}
 	plotByDeathCases = () => {
@@ -324,6 +339,7 @@ class Body extends React.Component {
 								currentCountry={this.state.currentCountry}
 								changeLoginStatus={this.props.changeLoginStatus}
 								onCountryChange={this.onCountryChange}
+								changeToOverallSidebar={this.changeToOverallSidebar}
 							/>
 						</div>
 					</div>

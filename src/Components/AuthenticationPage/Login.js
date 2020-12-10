@@ -5,7 +5,10 @@ const Login = (props) => {
 	return (
 		<div className="form-container">
 			<h4>Login</h4>
-			<div className={props.message ? "message" : "hide"}>
+			<div
+				data-testid="msg-cont"
+				className={props.message ? "message" : "hide"}
+			>
 				{`* ${props.message}`}
 			</div>
 			<div className="input-div">

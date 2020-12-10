@@ -58,6 +58,7 @@ class Navbar extends React.Component {
 				<div>
 					{this.state.user === null ? (
 						<button
+							data-testid="loginBtn"
 							className={this.state.isLoading ? "hidden auth-btn" : "auth-btn"}
 							onClick={() => {
 								this.props.changeLoginStatus(true)
@@ -67,8 +68,8 @@ class Navbar extends React.Component {
 							Login or Sign Up
 						</button>
 					) : (
-						<div>
-							<span className="welcome-cont">
+						<div data-testid="signOutButtonsCont">
+							<span data-testid="nameDisplay" className="welcome-cont">
 								Hi, {this.state.user.email.slice(0, 7) + ".."}
 							</span>
 							<button

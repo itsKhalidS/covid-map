@@ -15,13 +15,17 @@ const AppHeader = (props) => {
 						Confirmed&nbsp;:
 					</span>
 					{props.isLoading ? (
-						<span className="global-num-cont">
+						<span data-testid="TotConfspan" className="global-num-cont">
 							<span className="spinner-border spinner-border-sm text-dark"></span>
 						</span>
 					) : props.loadSuccessful ? (
-						<span className="global-num-cont">{props.data.TotalConfirmed}</span>
+						<span data-testid="TotConfspan" className="global-num-cont">
+							{props.data.TotalConfirmed}
+						</span>
 					) : (
-						<span className="global-num-cont">Failed to Load</span>
+						<span data-testid="TotConfspan" className="global-num-cont">
+							Failed to Load
+						</span>
 					)}
 				</div>
 				<div className="global-div">
@@ -32,7 +36,10 @@ const AppHeader = (props) => {
 					</span>
 					{props.isLoading ? (
 						<span className="global-num-cont">
-							<span className="spinner-border spinner-border-sm text-dark"></span>
+							<span
+								data-testid="loadSpan"
+								className="spinner-border spinner-border-sm text-dark"
+							></span>
 						</span>
 					) : props.loadSuccessful ? (
 						<span className="global-num-cont">{props.data.NewConfirmed}</span>
@@ -95,13 +102,17 @@ const AppHeader = (props) => {
 						Recovered&nbsp;:
 					</span>
 					{props.isLoading ? (
-						<span className="global-num-cont">
+						<span data-testid="NewRecov" className="global-num-cont">
 							<span className="spinner-border spinner-border-sm text-dark"></span>
 						</span>
 					) : props.loadSuccessful ? (
-						<span className="global-num-cont">{props.data.NewRecovered}</span>
+						<span data-testid="NewRecov" className="global-num-cont">
+							{props.data.NewRecovered}
+						</span>
 					) : (
-						<span className="global-num-cont">Failed to Load</span>
+						<span data-testid="NewRecov" className="global-num-cont">
+							Failed to Load
+						</span>
 					)}
 				</div>
 			</div>

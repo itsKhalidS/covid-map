@@ -15,6 +15,7 @@ const WatchListCard = (props) => {
 		<div
 			className="watch-list-card"
 			onClick={() => {
+				props.changeToOverallSidebar()
 				props.onCountryChange({
 					target: { value: props.country.Country },
 				})

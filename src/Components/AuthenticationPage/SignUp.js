@@ -5,7 +5,10 @@ const SignUp = (props) => {
 	return (
 		<div className="form-container">
 			<h4>Sign Up</h4>
-			<div className={props.message ? "message" : "hide"}>
+			<div
+				data-testid="msg-cont"
+				className={props.message ? "message" : "hide"}
+			>
 				{`* ${props.message}`}
 			</div>
 			<div className="input-div">
@@ -42,6 +45,7 @@ const SignUp = (props) => {
 				/>
 			</div>
 			<button
+				data-testid="sign-up-btn"
 				className={props.isLoading ? "page-btn disabled-btn" : "page-btn"}
 				onClick={props.signUpClick}
 				disabled={props.isLoading}

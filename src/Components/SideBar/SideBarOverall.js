@@ -7,11 +7,12 @@ const SideBarOverall = (props) => {
 			<div className="sidebar-div">
 				<h6>Select Country&nbsp;:</h6>
 				{props.isLoading ? (
-					<select className="country-dropdown">
+					<select data-testid="select" className="country-dropdown">
 						<option>Choose Country</option>
 					</select>
 				) : props.loadSuccessful ? (
 					<select
+						data-testid="select"
 						className="country-dropdown"
 						value={props.currentCountry.Country}
 						onChange={props.onCountryChange}
@@ -25,7 +26,7 @@ const SideBarOverall = (props) => {
 						})}
 					</select>
 				) : (
-					<select className="country-dropdown">
+					<select data-testid="select" className="country-dropdown">
 						<option>Choose Country</option>
 					</select>
 				)}
@@ -35,10 +36,13 @@ const SideBarOverall = (props) => {
 					<span>Total Confirmed&nbsp;:</span>
 					{props.isLoading ? (
 						<span className="sidebar-num-cont">
-							<span className="spinner-border spinner-border-sm text-dark"></span>
+							<span
+								data-testid="spinner"
+								className="spinner-border spinner-border-sm text-dark"
+							></span>
 						</span>
 					) : props.loadSuccessful ? (
-						<span className="sidebar-num-cont">
+						<span data-testid="totConf" className="sidebar-num-cont">
 							{props.currentCountry.TotalConfirmed}
 						</span>
 					) : (
@@ -54,7 +58,7 @@ const SideBarOverall = (props) => {
 							<span className="spinner-border spinner-border-sm text-dark"></span>
 						</span>
 					) : props.loadSuccessful ? (
-						<span className="sidebar-num-cont">
+						<span data-testid="newConf" className="sidebar-num-cont">
 							{props.currentCountry.NewConfirmed}
 						</span>
 					) : (
@@ -70,11 +74,13 @@ const SideBarOverall = (props) => {
 							<span className="spinner-border spinner-border-sm text-dark"></span>
 						</span>
 					) : props.loadSuccessful ? (
-						<span className="sidebar-num-cont">
+						<span data-testid="totDeath" className="sidebar-num-cont">
 							{props.currentCountry.TotalDeaths}
 						</span>
 					) : (
-						<span className="sidebar-num-cont">Failed to Load</span>
+						<span data-testid="failed" className="sidebar-num-cont">
+							Failed to Load
+						</span>
 					)}
 				</p>
 			</div>
@@ -86,7 +92,7 @@ const SideBarOverall = (props) => {
 							<span className="spinner-border spinner-border-sm text-dark"></span>
 						</span>
 					) : props.loadSuccessful ? (
-						<span className="sidebar-num-cont">
+						<span data-testid="newDeath" className="sidebar-num-cont">
 							{props.currentCountry.NewDeaths}
 						</span>
 					) : (
@@ -102,7 +108,7 @@ const SideBarOverall = (props) => {
 							<span className="spinner-border spinner-border-sm text-dark"></span>
 						</span>
 					) : props.loadSuccessful ? (
-						<span className="sidebar-num-cont">
+						<span data-testid="totRec" className="sidebar-num-cont">
 							{props.currentCountry.TotalRecovered}
 						</span>
 					) : (
@@ -118,7 +124,7 @@ const SideBarOverall = (props) => {
 							<span className="spinner-border spinner-border-sm text-dark"></span>
 						</span>
 					) : props.loadSuccessful ? (
-						<span className="sidebar-num-cont">
+						<span data-testid="newRec" className="sidebar-num-cont">
 							{props.currentCountry.NewRecovered}
 						</span>
 					) : (

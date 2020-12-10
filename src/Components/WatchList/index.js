@@ -4,6 +4,7 @@ import fire from "../../Config/fire.js"
 import "./styles.css"
 
 class WatchList extends React.Component {
+	_isMounted = false
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -30,7 +31,11 @@ class WatchList extends React.Component {
 		return null
 	}
 	componentDidMount = () => {
+		this._isMounted = true
 		this.authListener()
+	}
+	componentWillUnmount = () => {
+		this._isMounted = false
 	}
 	authListener = () => {
 		this.setState({ compLoading: true })
@@ -38,11 +43,13 @@ class WatchList extends React.Component {
 			if (user) {
 				this.retrieveData(user)
 			} else {
-				this.setState({
-					compLoading: false,
-					compSuccess: true,
-					user: null,
-				})
+				if (this._isMounted) {
+					this.setState({
+						compLoading: false,
+						compSuccess: true,
+						user: null,
+					})
+				}
 			}
 		})
 	}
@@ -54,12 +61,14 @@ class WatchList extends React.Component {
 			for (let id in response) {
 				watchCountries.push({ id, ...response[id] })
 			}
-			this.setState({
-				compLoading: false,
-				compSuccess: true,
-				user: user,
-				watchList: watchCountries,
-			})
+			if (this._isMounted) {
+				this.setState({
+					compLoading: false,
+					compSuccess: true,
+					user: user,
+					watchList: watchCountries,
+				})
+			}
 		})
 	}
 	databasePush = () => {
@@ -109,6 +118,7 @@ class WatchList extends React.Component {
 				this.state.loadSuccessful === false ? (
 					<div className="card-cont">
 						<button
+							data-testid="initial-add-country"
 							className={
 								this.state.isLoading ||
 								this.state.compLoading ||
@@ -167,6 +177,7 @@ class WatchList extends React.Component {
 									countries={this.state.countries}
 									onCountryChange={this.props.onCountryChange}
 									deleteWatchCountry={this.deleteWatchCountry}
+									changeToOverallSidebar={this.props.changeToOverallSidebar}
 								/>
 							)
 						})}

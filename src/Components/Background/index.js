@@ -24,7 +24,6 @@ class Background extends React.Component {
 					isLoading: false,
 					user: user,
 				})
-				console.log(user)
 			} else {
 				this.setState({
 					isLoading: false,

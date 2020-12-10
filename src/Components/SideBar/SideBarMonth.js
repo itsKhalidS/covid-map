@@ -7,6 +7,7 @@ const SideBarMonth = (props) => {
 			<div className="sidebar-div">
 				<h6>Select Country&nbsp;:</h6>
 				<select
+					data-testid="select"
 					className="country-dropdown"
 					disabled={props.isComponentLoading}
 					value={props.currentCountry.Country}
@@ -24,6 +25,7 @@ const SideBarMonth = (props) => {
 			<div className="sidebar-div">
 				<span>From&nbsp;:</span>
 				<input
+					data-testid="startDateInput"
 					className="sidebar-input"
 					type="date"
 					min="2020-01-22"
@@ -40,6 +42,7 @@ const SideBarMonth = (props) => {
 			<div className="sidebar-div">
 				<span>To&nbsp;:</span>
 				<input
+					data-testid="endDateInput"
 					className="sidebar-input"
 					type="date"
 					min="2020-01-22"
@@ -55,6 +58,7 @@ const SideBarMonth = (props) => {
 			</div>
 			<div className="sidebar-div">
 				<button
+					data-testid="search"
 					className="sidebar-button"
 					disabled={props.isComponentLoading}
 					onClick={props.dateValidation}
@@ -66,13 +70,17 @@ const SideBarMonth = (props) => {
 				<p className="sidebar-cont-p">
 					<span>Confirmed&nbsp;:</span>
 					{props.isComponentLoading ? (
-						<span className="sidebar-num-cont">
+						<span data-testid="conf" className="sidebar-num-cont">
 							<span className="spinner-border spinner-border-sm text-dark"></span>
 						</span>
 					) : props.componentLoadSuccessful ? (
-						<span className="sidebar-num-cont">{props.data.confirmed}</span>
+						<span data-testid="conf" className="sidebar-num-cont">
+							{props.data.confirmed}
+						</span>
 					) : (
-						<span className="sidebar-num-cont">Failed to Load</span>
+						<span data-testid="conf" className="sidebar-num-cont">
+							Failed to Load
+						</span>
 					)}
 				</p>
 			</div>
@@ -80,13 +88,17 @@ const SideBarMonth = (props) => {
 				<p className="sidebar-cont-p">
 					<span>Deaths&nbsp;:</span>
 					{props.isComponentLoading ? (
-						<span className="sidebar-num-cont">
+						<span data-testid="death" className="sidebar-num-cont">
 							<span className="spinner-border spinner-border-sm text-dark"></span>
 						</span>
 					) : props.componentLoadSuccessful ? (
-						<span className="sidebar-num-cont">{props.data.dead}</span>
+						<span data-testid="death" className="sidebar-num-cont">
+							{props.data.dead}
+						</span>
 					) : (
-						<span className="sidebar-num-cont">Failed to Load</span>
+						<span data-testid="death" className="sidebar-num-cont">
+							Failed to Load
+						</span>
 					)}
 				</p>
 			</div>
@@ -94,13 +106,20 @@ const SideBarMonth = (props) => {
 				<p className="sidebar-cont-p">
 					<span>Recoveries&nbsp;:</span>
 					{props.isComponentLoading ? (
-						<span className="sidebar-num-cont">
-							<span className="spinner-border spinner-border-sm text-dark"></span>
+						<span data-testid="recov" className="sidebar-num-cont">
+							<span
+								data-testid="spinner"
+								className="spinner-border spinner-border-sm text-dark"
+							></span>
 						</span>
 					) : props.componentLoadSuccessful ? (
-						<span className="sidebar-num-cont">{props.data.recovered}</span>
+						<span data-testid="recov" className="sidebar-num-cont">
+							{props.data.recovered}
+						</span>
 					) : (
-						<span className="sidebar-num-cont">Failed to Load</span>
+						<span data-testid="recov" className="sidebar-num-cont">
+							Failed to Load
+						</span>
 					)}
 				</p>
 			</div>
