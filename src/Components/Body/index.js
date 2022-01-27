@@ -68,7 +68,7 @@ class Body extends React.Component {
   fetchLatitudeLongitude = (result) => {
     let countryData = {},
       newCoordinates = [];
-    const url_latLon = "https://restcountries.eu/rest/v2/all";
+    const url_latLon = "https://restcountries.com/v2/all";
     fetch(url_latLon, {
       method: "GET",
     })
@@ -77,10 +77,16 @@ class Body extends React.Component {
       })
       .then((res) => {
         newCoordinates = res.map((country) => {
+          let lat = 0,
+            lon = 0;
+          if (country.latlng) {
+            lat = country.latlng[0] || 0;
+            lon = country.latlng[1] || 0;
+          }
           return {
-            CountryCode: country.alpha2Code.toUpperCase(),
-            Latitude: country.latlng[0],
-            Longitude: country.latlng[1],
+            CountryCode: country?.alpha2Code.toUpperCase() || "",
+            Latitude: lat,
+            Longitude: lon,
           };
         });
         countryData = result.Countries.find(

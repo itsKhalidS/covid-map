@@ -15,11 +15,11 @@ const MapChart = (props) => {
 		"https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
 
 	const deathPMScale = scaleLinear()
-		.domain([0, 1500])
+		.domain([0, 3500])
 		.range(["#FFE1C3", "#CE0A05"])
 
 	const confirmedPMScale = scaleLinear()
-		.domain([0, 55000])
+		.domain([0, 130000])
 		.range(["#FFE1C3", "#CE0A05"])
 
 	const totalCasesPerMillion = (totalCases, population) => {
